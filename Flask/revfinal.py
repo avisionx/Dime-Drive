@@ -4,6 +4,7 @@ from uber_rides.session import Session
 from uber_rides.client import UberRidesClient
 import random
 import copy 
+from math import sin, cos, sqrt, atan2, radians
 
 # Violet Line
 violet_line = ["Kashmere Gate","Lal Quila","Jama Masjid","Delhi Gate","ITO","Mandi House","Janpath","Central Secretariat","Khan Market","Jawaharlal Nehru Stadium","Jangpura","Lajpat Nagar","Moolchand","Kailash Colony","Nehru Place","Kalkaji Mandir","Govind Puri","Harkesh Nagar Okhla","Jasola Apollo","Sarita Vihar","Mohan Estate","Tughlakabad","Badarpur","Sarai","NHPC Chowk","Mewala Maharajpur","Sector- 28","Manav Rachna - Badkal Mor","Old Faridabad","Lakhani Armaan - Neelam Chowk Ajronda","Bata Chowk","Escorts Mujesar"]
@@ -120,13 +121,47 @@ def metro_breakpoints(source, destination, line):
 
     return data_array
 
-def getuberprice(a,b,c,d):
-	# session = Session(server_token=token)
-	# client = UberRidesClient(session)
-	# response = client.get_price_estimates(start_latitude=a,start_longitude=b,end_latitude=c,end_longitude=d,seat_count=2)
-	a = {"high_estimate": 10,"low_estimate": 5}
-	return a
 
+
+def get_pollution_from_uber(a,b,c,d):
+
+	R = 6373.0
+
+	lat1 = radians(a)
+	lon1 = radians(b)
+	lat2 = radians(c)
+	lon2 = radians(d)
+
+	dlon = lon2 - lon1
+	dlat = lat2 - lat1
+
+	a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+	c = 2 * atan2(sqrt(a), sqrt(1 - a))
+
+	distance = R * c
+	pollution = 0.15*distance
+	print("pollution: ", distance,pollution)
+	return pollution
+
+def getuberprice(a,b,c,d):
+
+	R = 6373.0
+
+	lat1 = radians(a)
+	lon1 = radians(b)
+	lat2 = radians(c)
+	lon2 = radians(d)
+
+	dlon = lon2 - lon1
+	dlat = lat2 - lat1
+
+	a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+	c = 2 * atan2(sqrt(a), sqrt(1 - a))
+
+	distance = R * c
+
+	a = {"high_estimate": 10*distance,"low_estimate": 9*distance}
+	return a
 
 def geolocator(loc):
 	print(loc)
@@ -163,7 +198,7 @@ def func(source, destination):
 	FinalInstructions = []
 	Finaldistance = []
 	Finalvary = []
-
+	FinalPollution = []
 	#sendiing all uber
 	# lolroutes = lolresult.get('routes')
 	# bb = []
@@ -181,7 +216,6 @@ def func(source, destination):
 	# rr = []
 	# rr.append("Car")
 	# Finalroutesmodes.append(rr)
-
 
 	for i in routes:
 		#remove this line
@@ -201,6 +235,7 @@ def func(source, destination):
 		distance = 0
 		price = 0
 		ctr=0
+		poll =0
 		for i in step :
 		    ctr = ctr+1
 		    # print(len(step))
@@ -215,6 +250,7 @@ def func(source, destination):
 
 		        time = time + i.get('duration').get('value')
 		        distance = distance + i.get('distance').get('value')
+		        poll+= ((i.get('distance').get('value')/1000)*0.05)
 		        if (i.get('distance').get('value') > 10000):
 		        	price = price + 15
 		        elif (i.get('distance').get('value') > 4000):
@@ -227,6 +263,7 @@ def func(source, destination):
 		        c2 = i.get('end_location')
 		        
 		        uberfromhere = getuberprice(lng2,lat2,c2.get('lng'),c2.get('lat'))
+		        poll+= get_pollution_from_uber(c2.get('lng'),c2.get('lat'),lng2,lat2)
 		        price =  price + uberfromhere.get('high_estimate')
 		        vary = uberfromhere.get('high_estimate') - uberfromhere.get('low_estimate')
 		        Finalvary.append(vary)
@@ -255,7 +292,8 @@ def func(source, destination):
 		        Finaltimes.append(time)
 		        Finaldistance.append(distance)
 		        FinalPrice.append(price)
-		        
+		        FinalPollution.append(poll)
+		        poll -=get_pollution_from_uber(c2.get('lng'),c2.get('lat'),lng2,lat2)
 		        deep_copy_Instruction = copy.deepcopy(Instruction)
 		        deep_copy_Instruction.append("Start travel from Uber")
 		        revinstruct = []
@@ -309,6 +347,7 @@ def func(source, destination):
 			        	
 			        	cc1 = Transit_Details.get('departure_stop').get('location')
 			        	another_uber = getuberprice(lng2,lat2,cc1.get('lng'),cc1.get('lat'))
+			        	poll+= get_pollution_from_uber(lng2,lat2,cc1.get('lng'),cc1.get('lat'))
 			        	price =  price + another_uber.get('high_estimate')
 			        	cvary = another_uber.get('high_estimate') - another_uber.get('low_estimate')
 			        	Finalvary.append(cvary)
@@ -335,7 +374,8 @@ def func(source, destination):
 				        Finaltimes.append(time)
 				        Finaldistance.append(distance)
 				        FinalPrice.append(price)
-
+				        FinalPollution.append(poll)
+				        poll -= get_pollution_from_uber(lng2,lat2,cc1.get('lng'),cc1.get('lat'))
 				        copyinstruction.append("Start travel from Uber")
 				        revins = []
 				        for i in reversed(copyinstruction):
@@ -365,6 +405,7 @@ def func(source, destination):
 		        c1 = i.get('start_location')
 		        c2 = i.get('end_location')
 		        uberfromhere = getuberprice(lng2,lat2,c2.get('lng'),c2.get('lat'))
+		        poll+= get_pollution_from_uber(lng2,lat2,cc1.get('lng'),cc1.get('lat'))
 		        #print(uberfromhere)
 		        price =  price + uberfromhere.get('high_estimate')
 		        vary = uberfromhere.get('high_estimate') - uberfromhere.get('low_estimate')
@@ -393,7 +434,7 @@ def func(source, destination):
 		        Finaltimes.append(time)
 		        Finaldistance.append(distance)
 		        FinalPrice.append(price)
-		        
+		        FinalPollution.append(poll)
 		        deep_copy_Instruction = copy.deepcopy(Instruction)
 		        deep_copy_Instruction.append("Start travel from Uber ")
 		        revinstru = []
@@ -404,6 +445,7 @@ def func(source, destination):
 		        time = time - newtime
 		        distance = distance - newdist
 		        price =  price - uberfromhere.get('high_estimate')
+		        poll -=get_pollution_from_uber(c2.get('lng'),c2.get('lat'),lng2,lat2)
 	allpublicindex = len(Finaltimes) -1        
 	#return ....
 	# print(FinalInstructions,"finalins")
@@ -420,6 +462,7 @@ def func(source, destination):
 		iiinnerdict["R"] = Finalroutes[i]
 		iiinnerdict["I"] = FinalInstructions[i]
 		iiinnerdict["D"] = Finaldistance[i]
+		iiinnerdict["Z"] = FinalPollution[i]
 		outerarray.append(iiinnerdict)
 		mini+=1
 	print()		
