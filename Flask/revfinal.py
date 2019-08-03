@@ -139,8 +139,8 @@ def get_pollution_from_uber(a,b,c,d):
 	c = 2 * atan2(sqrt(a), sqrt(1 - a))
 
 	distance = R * c
-	pollution = 0.15*distance
-	print("pollution: ", distance,pollution)
+	pollution = 0.10*distance
+	#print("pollution: ", distance,pollution)
 	return pollution
 
 def getuberprice(a,b,c,d):
@@ -250,7 +250,7 @@ def func(source, destination):
 
 		        time = time + i.get('duration').get('value')
 		        distance = distance + i.get('distance').get('value')
-		        poll+= ((i.get('distance').get('value')/1000)*0.05)
+		        poll+= ((i.get('distance').get('value')/1000)*0.025)
 		        if (i.get('distance').get('value') > 10000):
 		        	price = price + 15
 		        elif (i.get('distance').get('value') > 4000):
