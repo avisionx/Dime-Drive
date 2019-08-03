@@ -5,42 +5,38 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Z3R0D4RKF0RTY</title>
+        <title>Dime Drive</title>
         <link rel="icon" href="./src/images/favicon.png">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-        <!-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet"> -->
+        <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="./src/css/app.css">
         <link rel="manifest" href="./manifest.json">
     </head>
 
     <body>
 
-       <div class="nav-toggle">
-            <div class="nav-toggle-bar"></div>
+        <div class="nav-toggle p-3">
+            <div class="nav-toggle">
+                <div class="nav-toggle-bar"></div>
+            </div>
         </div>
-       
+
         <nav class="nav">
-            <div class="container">
-                <div class="row mt-5 pt-5">
-                    <div class="col-12 pt-5" style="text-align: center;">
-                        <img src="./src/images/profile.jpeg" class="rounded-circle" style="width: 70%">
+            <div class="d-flex flex-column">
+                <div class="col-12" style="margin-bottom: -2rem">
+                    <div class="col-12 mt-5 pt-3" style="text-align: center;">
+                        <img src="./src/images/profile.jpeg" class="rounded-circle" style="width: 50%">
                     </div>
-                    <div class="col-12 text-center mt-4 mb-5 pb-5"><span class="text-center" style="margin-top: -100px;">John Doe</span></div>
+                    <div class="col-12 text-center mt-3"><span class="text-center" style="margin-top: -100px;">avisionx</span></div>
                 </div>
-                <div class="row">
-                    <div class="col text-center mt-5 pt-5">
-                        <span class="small text-center mt-5 text-dark">Logout</span>
-                    </div>
-                </div>
-                <div class="row mt-5 pt-5">
-                    <div class="col-9" onclick="toggleNightModeShift()">
-                        <p>Night Mode</p>
-                    </div>
-                    <div class="col-3">
-                        <label class="switch">
-                            <input type="checkbox" id="inputSlide" onclick="event.preventDefault();">
-                            <span class="slider round"></span>
-                        </label>
+                <div class="col-12 pb-5 flex-shrink-1">
+                    <div class="row hover-animation" onclick="toggleNightModeShift()">
+                        <div class="col-9 d-flex align-items-center">
+                            <p class="m-0">Night Mode</p>
+                        </div>
+                        <div class="col-auto bg-danger p-1" id="nightModeRadio">
+                            OFF
+                        </div>
                     </div>  
                 </div>
             </div>
@@ -53,22 +49,16 @@
         <div class="arrow" id="arrow-routes"></div>
 
         <nav class="nav-right">
-            <div class="container" id="rightPanel">
-                
-                <div class="row">
-                    <div class="col">
-                        <h1 class="mt-4">Routes</h1>
-                    </div>
-                </div>
-                
+            <h1 class="mt-5 mb-4">Routes</h1>
+            <div class="container" id="rightPanel" style="overflow-y:scroll; height: 100%; padding-bottom: 100px">   
             </div>
         </nav>
 
-        <input id="pac-input1" class="controls search-bar" type="text" placeholder="">
-
-        <input id="pac-input2" class="controls search-bar" style="" type="text" placeholder="Destination">
+        <input id="pac-input1" class="controls search-bar" type="text" placeholder="Your Location">
+        <input id="pac-input2" class="controls search-bar" type="text" placeholder="Destination">
 
         <div id="map_canvas"></div>
+
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYtknq4sKKgRyDsGmWofiQ94mFFGBjRJM&callback=initialize&libraries=geometry,places" type="text/javascript"></script>
         <script src="./src/js/jquery-3.3.1.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
@@ -88,8 +78,8 @@
                 userPos = [position.coords.latitude, position.coords.longitude];
             }
 
-            var hardData = [{'M': ['Car'], 'P': 385.0, 'T': 2093, 'R': ['kffmDarcvM\\jBp@fCj@zBi@|AkEhNoDtLBBDF?HGPQDC?AAYt@}A`FuB_Ai@U_DuA?@A@ABI@GAEG?I?CaDwAq@xBYn@g@t@MVOM[WoB}AoAy@c@WiAc@gBg@}Bc@kGyAsGcBcBe@wGaBaGaBcEaA}Bm@aEgAuBYoHu@yCUmGi@{D[{BM}BQgG_@JkCZwFF_ELaAAyACcCKuC[aJa@uLEwBGsCCsBDyBPmFXsOFwCAqASiAQk@uC_FO[MKi@[a@Ws@]qEqAu@_@c@a@[m@So@Gs@CcABcESsAEiGIqE_@_Ck@wAeEeHeL}R{AeCm@gAg@k@e@c@iAs@_@Q}AcA[Sq@q@Y[Yi@i@}Ac@iFCsA?{@LuEXaILmZA}BMuIEmAWeBU{@Yk@a@q@c@i@i@g@m@_@kBw@qBq@kBeA{A{AkJmL_CyCgCgDeAqAk@{@i@gA[eAQiAE}APcC`@oBt@}CPsA?{AGu@QqAk@cDYuAKaACw@@aAJkAZyA`@gAf@w@bI_Kr@eA|AyBtAeC`AoAlAoB`AkBx@}Bd@wBL{AFyFD{FE{@SiBe@gC}@cDSq@k@mA_A_CWu@mDwImAkDGe@Cq@Ls@J]Xc@p@g@\\IVCN?r@JZNhAx@z@~@`@h@Xf@v@jBXb@`@Th@@h@O~AkBH]Nu@F_@AmA@cAAkAeBaNQyCCm@Bm@BWLULmB\\wBr@}Bz@cBx@mArDwEjDwD|D{EdCyDl@iAd@kAr@{B`@aBNu@Ly@RqBJkC@wCOkDSoBQgAOw@WcAa@yAq@eBkEcNyGySeC}Hy@eDUuASiBMuBCuBFmBPsB`@oCn@}BdAeCj@gAvAqBfCkCjBaB~FkEzByAbEsBtA{@vAkAtA_B|@oAZm@Vm@Tu@\\}ARwAF{@Bs@CsBGcAK_AKg@Sc@_@mA]a@QKYGW?YD[NWTOXG\\Ap@H`@Zf@h@V\\B\\Cf@ONAJGh@c@zCyB`@OfBkAjBwAfFmDrMqIlI}Fh@u@HWFY?QAaAk@kGYqC]sE]uEKq@k@wFQuAK[c@_AEImAqB}BpB'], 'I': ['All from Uber'], 'D': 20102}, {'M': ['Walk', 'Metro', 'Walk', 'Metro', 'Walk'], 'P': 35.0, 'T': 5756, 'R': ['sffmD_rcvM^jBn@`CBL^xABLBF[~@K\\aC~HEL_ApCGNK^Qj@Ut@ENoBrGC?A?A?A?A?A?A?A@A?A??@A?A??@A@A@A@ABIAKCIAWGCLGAaCi@i@KgBe@IZs@xCMb@KGA?A?A?A?A??@A?A?A@A??@A??@A?ELoAi@cAc@', 'whgmDwebvMHD`C_IpIcYzBcJhA}FnAgG`AgE`AiDdBuDnByDfBmE`BuEf@sBd@cDb@{GVwEFgA`@}Cn@uCj@aCXwB@_CMmBcAuEa@qEAqCP}Fl@gPN}Cn@}IPuFFcC\\}Ll@}QLwAd@oCp@wCX_BTuCHwAb@_I`AsMToEEqAWuB{CmLs@kCuCoKY}B]{Eo@mDaDcKmEyNUeCO{EQwBw@wCkAqCuCgH{B}E_AoAcFqEaE{Da@a@iCmDmAsBiB{Ca@eAmEyOmBiHk@sAm@iAcC_DcCaDcAyAk@oAk@gAiCkGiCuGsAiDsCeHkBaFu@aCiAeDYs@{AsDqAqDk@oBSgAUyBOyCCwD@aJAiFEeBKeAOy@k@_Ca@iAq@_Bg@u@}@w@cAy@cDkCcAeAqA}AaA{Ae@kAWeAOsAAiADeAV}A^gAl@iAf@o@f@g@x@g@dA]l@Kv@IxA@pEDfCBtC@dAHbANpBd@|AZ|@J|@B~@A`AGj@KnA]rBq@pCkAnBs@fAY~Ao@~@]b@KzAYbBSrAUr@Q|@_@pCqAnFgCxCwA`CkAfC{AbBiAbAg@RKfD_BbA]`AY|Ao@tBgAtB_AhB}@tCkBjD}BzB}A~AkAt@c@d@c@f@o@v@eA`@u@p@eBb@qA^yAJw@FiAAyAK{A]aBc@qAg@{@{@gAgDoCeJ{HeAgAuA_Be@i@wDmE}DwEaCaD_D{DuBgC}IyKyFkHyBmCeCoCiEiDcBqBoAgBMQaFwHeFeIgBcDsAyC{@yBqEwNuFyQ{BmHOc@g@iAWc@k@o@_@Yw@a@eAa@_AOwAEyAHeAVsAp@oBpAmBnAHP', 'kyimDgh_wMc@aB', 'ozimDik_wMKMIHKJMLKLOLKJMNKJMNKJONIJKJMJOPKJMNKJONIJMLMLMNKJMLKNMLGJMNKLGLMPIJMPMPINKPILKPKLKPININGHILMTMRILKPILGJKPIJKRMRILKPILMPGLIJKPGJMRILININOTILKNILKNKLKNILMPIJKLOPMNMNKLGHONIJONKLMLOPKJMNKJMNKJKJMLOPKJIJMLKJMNIJONOPKJKJKLMLKLEDLN', 'wdkmDgx}vMZ~@KJ`@n@p@x@NRV\\Z`@fA~A@L?BzBFIhB?Bw@ACtAK~BANNBBBBDBF~AlCFLZt@ZGrAm@NK'], 'I': ['Walk to R.K. Puram', 'Metro rail towards Botanical Garden and stop at Botanical Garden', 'Walk to Botanical Garden', 'Metro rail towards Dwarka Sector- 21 and stop at Noida Sec.-18', 'Walk to Plot No - M 03, Sector 18, Noida, Uttar Pradesh 201301, India'], 'D': 22280}, {'M': ['Walk', 'Metro', 'Car'], 'P': 111.0, 'T': 3019, 'R': ['sffmD_rcvM^jBn@`CBL^xABLBF[~@K\\aC~HEL_ApCGNK^Qj@Ut@ENoBrGC?A?A?A?A?A?A?A@A?A??@A?A??@A@A@A@ABIAKCIAWGCLGAaCi@i@KgBe@IZs@xCMb@KGA?A?A?A?A??@A?A?A@A??@A??@A?ELoAi@cAc@', 'whgmDwebvMHD`C_IpIcYzBcJhA}FnAgG`AgE`AiDdBuDnByDfBmE`BuEf@sBd@cDb@{GVwEFgA`@}Cn@uCj@aCXwB@_CMmBcAuEa@qEAqCP}Fl@gPN}Cn@}IPuFFcC\\}Ll@}QLwAd@oCp@wCX_BTuCHwAb@_I`AsMToEEqAWuB{CmLs@kCuCoKY}B]{Eo@mDaDcKmEyNUeCO{EQwBw@wCkAqCuCgH{B}E_AoAcFqEaE{Da@a@iCmDmAsBiB{Ca@eAmEyOmBiHk@sAm@iAcC_DcCaDcAyAk@oAk@gAiCkGiCuGsAiDsCeHkBaFu@aCiAeDYs@{AsDqAqDk@oBSgAUyBOyCCwD@aJAiFEeBKeAOy@k@_Ca@iAq@_Bg@u@}@w@cAy@cDkCcAeAqA}AaA{Ae@kAWeAOsAAiADeAV}A^gAl@iAf@o@f@g@x@g@dA]l@Kv@IxA@pEDfCBtC@dAHbANpBd@|AZ|@J|@B~@A`AGj@KnA]rBq@pCkAnBs@fAY~Ao@~@]b@KzAYbBSrAUr@Q|@_@pCqAnFgCxCwA`CkAfC{AbBiAbAg@RKfD_BbA]`AY|Ao@tBgAtB_AhB}@tCkBjD}BzB}A~AkAt@c@d@c@f@o@v@eA`@u@p@eBb@qA^yAJw@FiAAyAK{A]aBc@qAg@{@{@gAgDoCeJ{HeAgAuA_Be@i@wDmE}DwEaCaD_D{DuBgC}IyKyFkHyBmCeCoCiEiDcBqBoAgBMQaFwHeFeIgBcDsAyC{@yBqEwNuFyQ{BmHOc@g@iAWc@k@o@_@Yw@a@eAa@_AOwAEyAHeAVsAp@oBpAmBnAHP', '}ximDqg_wMcDbCQB[UGAIBoAjAwAeBgC~E_@bAaBlDwA|BiA|Ac@h@sBtC{AdCkCdEKVETAPf@r@lE|FrBfCzBnCBn@fCxDx@xAN^FT`@tB|@~Gd@hEN~@Dl@Rv@fAzMQRO@MAOUk@kGYqC]sE]uEKq@k@wFQuAK[c@_ACCc@X?Dl@zA\\dCZtCIJ[BNOFK?KGEI?]LKJqAH'], 'I': ['Walk to R.K. Puram', 'Metro rail towards Botanical Garden and stop at Botanical Garden', 'Travel rest by uber '], 'D': 23757}, {'M': ['Walk', 'Metro', 'Walk', 'Metro', 'Car'], 'P': 106.0, 'T': 3712, 'R': ['sffmD_rcvM^jBn@`CBL^xABLBF[~@K\\aC~HEL_ApCGNK^Qj@Ut@ENoBrGC?A?A?A?A?A?A?A@A?A??@A?A??@A@A@A@ABIAKCIAWGCLGAaCi@i@KgBe@IZs@xCMb@KGA?A?A?A?A??@A?A?A@A??@A??@A?ELoAi@cAc@', 'whgmDwebvMHD`C_IpIcYzBcJhA}FnAgG`AgE`AiDdBuDnByDfBmE`BuEf@sBd@cDb@{GVwEFgA`@}Cn@uCj@aCXwB@_CMmBcAuEa@qEAqCP}Fl@gPN}Cn@}IPuFFcC\\}Ll@}QLwAd@oCp@wCX_BTuCHwAb@_I`AsMToEEqAWuB{CmLs@kCuCoKY}B]{Eo@mDaDcKmEyNUeCO{EQwBw@wCkAqCuCgH{B}E_AoAcFqEaE{Da@a@iCmDmAsBiB{Ca@eAmEyOmBiHk@sAm@iAcC_DcCaDcAyAk@oAk@gAiCkGiCuGsAiDsCeHkBaFu@aCiAeDYs@{AsDqAqDk@oBSgAUyBOyCCwD@aJAiFEeBKeAOy@k@_Ca@iAq@_Bg@u@}@w@cAy@cDkCcAeAqA}AaA{Ae@kAWeAOsAAiADeAV}A^gAl@iAf@o@f@g@x@g@dA]l@Kv@IxA@pEDfCBtC@dAHbANpBd@|AZ|@J|@B~@A`AGj@KnA]rBq@pCkAnBs@fAY~Ao@~@]b@KzAYbBSrAUr@Q|@_@pCqAnFgCxCwA`CkAfC{AbBiAbAg@RKfD_BbA]`AY|Ao@tBgAtB_AhB}@tCkBjD}BzB}A~AkAt@c@d@c@f@o@v@eA`@u@p@eBb@qA^yAJw@FiAAyAK{A]aBc@qAg@{@{@gAgDoCeJ{HeAgAuA_Be@i@wDmE}DwEaCaD_D{DuBgC}IyKyFkHyBmCeCoCiEiDcBqBoAgBMQaFwHeFeIgBcDsAyC{@yBqEwNuFyQ{BmHOc@g@iAWc@k@o@_@Yw@a@eAa@_AOwAEyAHeAVsAp@oBpAmBnAHP', 'kyimDgh_wMc@aB', 'ozimDik_wMKMIHKJMLKLOLKJMNKJMNKJONIJKJMJOPKJMNKJONIJMLMLMNKJMLKNMLGJMNKLGLMPIJMPMPINKPILKPKLKPININGHILMTMRILKPILGJKPIJKRMRILKPILMPGLIJKPGJMRILININOTILKNILKNKLKNILMPIJKLOPMNMNKLGHONIJONKLMLOPKJMNKJMNKJKJMLOPKJIJMLKJMNIJONOPKJKJKLMLKLEDLN', 'wdkmDgx}vMoDtDmIbJsAxA?NBf@Dj@pEhFrHjIJDJAROxLsKFLMJZt@ZGrAm@ROLEXCp@e@DFHA|AkAl@~Ax@tGADCH_@DV[?KGEg@LKJqAH'], 'I': ['Walk to R.K. Puram', 'Metro rail towards Botanical Garden and stop at Botanical Garden', 'Walk to Botanical Garden', 'Metro rail towards Dwarka Sector- 21 and stop at Noida Sec.-18', 'Travel rest by uber '], 'D': 23390},{'M': ['Car', 'Metro', 'Walk'], 'P': 118.0, 'T': 2758, 'R': ['enjmDct|vMpAIJKf@MFD?JWZ^EBI@Ey@uGm@_Bb@[oAwBiAuBoB{Bu@aAo@u@mIaLaIgL{@eA_@m@Wa@qAiBo@g@kAcBgBwBgByCuAsBy@uAj@o@LPbAzA~GdK`AtBfEjGHND?HBHFdGbJv@Ij@MvA{BZg@dAsBxAkCj@{@vBaEfCyDj@mAt@sAfGuJbBkCdDqFTu@fC_E`C_EFAJBTZ@LAJS^eBnCmC`Eo@b@GHGH@NAPEJOZo@bAbBzB`AhA?D?Li@lAo@d@', 'whgmDwebvMHD`C_IpIcYzBcJhA}FnAgG`AgE`AiDdBuDnByDfBmE`BuEf@sBd@cDb@{GVwEFgA`@}Cn@uCj@aCXwB@_CMmBcAuEa@qEAqCP}Fl@gPN}Cn@}IPuFFcC\\}Ll@}QLwAd@oCp@wCX_BTuCHwAb@_I`AsMToEEqAWuB{CmLs@kCuCoKY}B]{Eo@mDaDcKmEyNUeCO{EQwBw@wCkAqCuCgH{B}E_AoAcFqEaE{Da@a@iCmDmAsBiB{Ca@eAmEyOmBiHk@sAm@iAcC_DcCaDcAyAk@oAk@gAiCkGiCuGsAiDsCeHkBaFu@aCiAeDYs@{AsDqAqDk@oBSgAUyBOyCCwD@aJAiFEeBKeAOy@k@_Ca@iAq@_Bg@u@}@w@cAy@cDkCcAeAqA}AaA{Ae@kAWeAOsAAiADeAV}A^gAl@iAf@o@f@g@x@g@dA]l@Kv@IxA@pEDfCBtC@dAHbANpBd@|AZ|@J|@B~@A`AGj@KnA]rBq@pCkAnBs@fAY~Ao@~@]b@KzAYbBSrAUr@Q|@_@pCqAnFgCxCwA`CkAfC{AbBiAbAg@RKfD_BbA]`AY|Ao@tBgAtB_AhB}@tCkBjD}BzB}A~AkAt@c@d@c@f@o@v@eA`@u@p@eBb@qA^yAJw@FiAAyAK{A]aBc@qAg@{@{@gAgDoCeJ{HeAgAuA_Be@i@wDmE}DwEaCaD_D{DuBgC}IyKyFkHyBmCeCoCiEiDcBqBoAgBMQaFwHeFeIgBcDsAyC{@yBqEwNuFyQ{BmHOc@g@iAWc@k@o@_@Yw@a@eAa@_AOwAEyAHeAVsAp@oBpAmBnAHP', 'sffmD_rcvM^jBn@`CBL^xABLBF[~@K\\aC~HEL_ApCGNK^Qj@Ut@ENoBrGC?A?A?A?A?A?A?A@A?A??@A?A??@A@A@A@ABIAKCIAWGCLGAaCi@i@KgBe@IZs@xCMb@KGA?A?A?A?A??@A?A?A@A??@A??@A?ELoAi@cAc@'], 'I': ['Start travel from Uber ', 'Metro to R.K. Puram from  Botanical Garden', 'Walk from R.K. Puram'], 'D': 25064}];
-
+            // var hardData = [{'M': ['Car'], 'P': 385.0, 'T': 2093, 'R': ['kffmDarcvM\\jBp@fCj@zBi@|AkEhNoDtLBBDF?HGPQDC?AAYt@}A`FuB_Ai@U_DuA?@A@ABI@GAEG?I?CaDwAq@xBYn@g@t@MVOM[WoB}AoAy@c@WiAc@gBg@}Bc@kGyAsGcBcBe@wGaBaGaBcEaA}Bm@aEgAuBYoHu@yCUmGi@{D[{BM}BQgG_@JkCZwFF_ELaAAyACcCKuC[aJa@uLEwBGsCCsBDyBPmFXsOFwCAqASiAQk@uC_FO[MKi@[a@Ws@]qEqAu@_@c@a@[m@So@Gs@CcABcESsAEiGIqE_@_Ck@wAeEeHeL}R{AeCm@gAg@k@e@c@iAs@_@Q}AcA[Sq@q@Y[Yi@i@}Ac@iFCsA?{@LuEXaILmZA}BMuIEmAWeBU{@Yk@a@q@c@i@i@g@m@_@kBw@qBq@kBeA{A{AkJmL_CyCgCgDeAqAk@{@i@gA[eAQiAE}APcC`@oBt@}CPsA?{AGu@QqAk@cDYuAKaACw@@aAJkAZyA`@gAf@w@bI_Kr@eA|AyBtAeC`AoAlAoB`AkBx@}Bd@wBL{AFyFD{FE{@SiBe@gC}@cDSq@k@mA_A_CWu@mDwImAkDGe@Cq@Ls@J]Xc@p@g@\\IVCN?r@JZNhAx@z@~@`@h@Xf@v@jBXb@`@Th@@h@O~AkBH]Nu@F_@AmA@cAAkAeBaNQyCCm@Bm@BWLULmB\\wBr@}Bz@cBx@mArDwEjDwD|D{EdCyDl@iAd@kAr@{B`@aBNu@Ly@RqBJkC@wCOkDSoBQgAOw@WcAa@yAq@eBkEcNyGySeC}Hy@eDUuASiBMuBCuBFmBPsB`@oCn@}BdAeCj@gAvAqBfCkCjBaB~FkEzByAbEsBtA{@vAkAtA_B|@oAZm@Vm@Tu@\\}ARwAF{@Bs@CsBGcAK_AKg@Sc@_@mA]a@QKYGW?YD[NWTOXG\\Ap@H`@Zf@h@V\\B\\Cf@ONAJGh@c@zCyB`@OfBkAjBwAfFmDrMqIlI}Fh@u@HWFY?QAaAk@kGYqC]sE]uEKq@k@wFQuAK[c@_AEImAqB}BpB'], 'I': ['All from Uber'], 'D': 20102}, {'M': ['Walk', 'Metro', 'Walk', 'Metro', 'Walk'], 'P': 35.0, 'T': 5756, 'R': ['sffmD_rcvM^jBn@`CBL^xABLBF[~@K\\aC~HEL_ApCGNK^Qj@Ut@ENoBrGC?A?A?A?A?A?A?A@A?A??@A?A??@A@A@A@ABIAKCIAWGCLGAaCi@i@KgBe@IZs@xCMb@KGA?A?A?A?A??@A?A?A@A??@A??@A?ELoAi@cAc@', 'whgmDwebvMHD`C_IpIcYzBcJhA}FnAgG`AgE`AiDdBuDnByDfBmE`BuEf@sBd@cDb@{GVwEFgA`@}Cn@uCj@aCXwB@_CMmBcAuEa@qEAqCP}Fl@gPN}Cn@}IPuFFcC\\}Ll@}QLwAd@oCp@wCX_BTuCHwAb@_I`AsMToEEqAWuB{CmLs@kCuCoKY}B]{Eo@mDaDcKmEyNUeCO{EQwBw@wCkAqCuCgH{B}E_AoAcFqEaE{Da@a@iCmDmAsBiB{Ca@eAmEyOmBiHk@sAm@iAcC_DcCaDcAyAk@oAk@gAiCkGiCuGsAiDsCeHkBaFu@aCiAeDYs@{AsDqAqDk@oBSgAUyBOyCCwD@aJAiFEeBKeAOy@k@_Ca@iAq@_Bg@u@}@w@cAy@cDkCcAeAqA}AaA{Ae@kAWeAOsAAiADeAV}A^gAl@iAf@o@f@g@x@g@dA]l@Kv@IxA@pEDfCBtC@dAHbANpBd@|AZ|@J|@B~@A`AGj@KnA]rBq@pCkAnBs@fAY~Ao@~@]b@KzAYbBSrAUr@Q|@_@pCqAnFgCxCwA`CkAfC{AbBiAbAg@RKfD_BbA]`AY|Ao@tBgAtB_AhB}@tCkBjD}BzB}A~AkAt@c@d@c@f@o@v@eA`@u@p@eBb@qA^yAJw@FiAAyAK{A]aBc@qAg@{@{@gAgDoCeJ{HeAgAuA_Be@i@wDmE}DwEaCaD_D{DuBgC}IyKyFkHyBmCeCoCiEiDcBqBoAgBMQaFwHeFeIgBcDsAyC{@yBqEwNuFyQ{BmHOc@g@iAWc@k@o@_@Yw@a@eAa@_AOwAEyAHeAVsAp@oBpAmBnAHP', 'kyimDgh_wMc@aB', 'ozimDik_wMKMIHKJMLKLOLKJMNKJMNKJONIJKJMJOPKJMNKJONIJMLMLMNKJMLKNMLGJMNKLGLMPIJMPMPINKPILKPKLKPININGHILMTMRILKPILGJKPIJKRMRILKPILMPGLIJKPGJMRILININOTILKNILKNKLKNILMPIJKLOPMNMNKLGHONIJONKLMLOPKJMNKJMNKJKJMLOPKJIJMLKJMNIJONOPKJKJKLMLKLEDLN', 'wdkmDgx}vMZ~@KJ`@n@p@x@NRV\\Z`@fA~A@L?BzBFIhB?Bw@ACtAK~BANNBBBBDBF~AlCFLZt@ZGrAm@NK'], 'I': ['Walk to R.K. Puram', 'Metro rail towards Botanical Garden and stop at Botanical Garden', 'Walk to Botanical Garden', 'Metro rail towards Dwarka Sector- 21 and stop at Noida Sec.-18', 'Walk to Plot No - M 03, Sector 18, Noida, Uttar Pradesh 201301, India'], 'D': 22280}, {'M': ['Walk', 'Metro', 'Car'], 'P': 111.0, 'T': 3019, 'R': ['sffmD_rcvM^jBn@`CBL^xABLBF[~@K\\aC~HEL_ApCGNK^Qj@Ut@ENoBrGC?A?A?A?A?A?A?A@A?A??@A?A??@A@A@A@ABIAKCIAWGCLGAaCi@i@KgBe@IZs@xCMb@KGA?A?A?A?A??@A?A?A@A??@A??@A?ELoAi@cAc@', 'whgmDwebvMHD`C_IpIcYzBcJhA}FnAgG`AgE`AiDdBuDnByDfBmE`BuEf@sBd@cDb@{GVwEFgA`@}Cn@uCj@aCXwB@_CMmBcAuEa@qEAqCP}Fl@gPN}Cn@}IPuFFcC\\}Ll@}QLwAd@oCp@wCX_BTuCHwAb@_I`AsMToEEqAWuB{CmLs@kCuCoKY}B]{Eo@mDaDcKmEyNUeCO{EQwBw@wCkAqCuCgH{B}E_AoAcFqEaE{Da@a@iCmDmAsBiB{Ca@eAmEyOmBiHk@sAm@iAcC_DcCaDcAyAk@oAk@gAiCkGiCuGsAiDsCeHkBaFu@aCiAeDYs@{AsDqAqDk@oBSgAUyBOyCCwD@aJAiFEeBKeAOy@k@_Ca@iAq@_Bg@u@}@w@cAy@cDkCcAeAqA}AaA{Ae@kAWeAOsAAiADeAV}A^gAl@iAf@o@f@g@x@g@dA]l@Kv@IxA@pEDfCBtC@dAHbANpBd@|AZ|@J|@B~@A`AGj@KnA]rBq@pCkAnBs@fAY~Ao@~@]b@KzAYbBSrAUr@Q|@_@pCqAnFgCxCwA`CkAfC{AbBiAbAg@RKfD_BbA]`AY|Ao@tBgAtB_AhB}@tCkBjD}BzB}A~AkAt@c@d@c@f@o@v@eA`@u@p@eBb@qA^yAJw@FiAAyAK{A]aBc@qAg@{@{@gAgDoCeJ{HeAgAuA_Be@i@wDmE}DwEaCaD_D{DuBgC}IyKyFkHyBmCeCoCiEiDcBqBoAgBMQaFwHeFeIgBcDsAyC{@yBqEwNuFyQ{BmHOc@g@iAWc@k@o@_@Yw@a@eAa@_AOwAEyAHeAVsAp@oBpAmBnAHP', '}ximDqg_wMcDbCQB[UGAIBoAjAwAeBgC~E_@bAaBlDwA|BiA|Ac@h@sBtC{AdCkCdEKVETAPf@r@lE|FrBfCzBnCBn@fCxDx@xAN^FT`@tB|@~Gd@hEN~@Dl@Rv@fAzMQRO@MAOUk@kGYqC]sE]uEKq@k@wFQuAK[c@_ACCc@X?Dl@zA\\dCZtCIJ[BNOFK?KGEI?]LKJqAH'], 'I': ['Walk to R.K. Puram', 'Metro rail towards Botanical Garden and stop at Botanical Garden', 'Travel rest by uber '], 'D': 23757}, {'M': ['Walk', 'Metro', 'Walk', 'Metro', 'Car'], 'P': 106.0, 'T': 3712, 'R': ['sffmD_rcvM^jBn@`CBL^xABLBF[~@K\\aC~HEL_ApCGNK^Qj@Ut@ENoBrGC?A?A?A?A?A?A?A@A?A??@A?A??@A@A@A@ABIAKCIAWGCLGAaCi@i@KgBe@IZs@xCMb@KGA?A?A?A?A??@A?A?A@A??@A??@A?ELoAi@cAc@', 'whgmDwebvMHD`C_IpIcYzBcJhA}FnAgG`AgE`AiDdBuDnByDfBmE`BuEf@sBd@cDb@{GVwEFgA`@}Cn@uCj@aCXwB@_CMmBcAuEa@qEAqCP}Fl@gPN}Cn@}IPuFFcC\\}Ll@}QLwAd@oCp@wCX_BTuCHwAb@_I`AsMToEEqAWuB{CmLs@kCuCoKY}B]{Eo@mDaDcKmEyNUeCO{EQwBw@wCkAqCuCgH{B}E_AoAcFqEaE{Da@a@iCmDmAsBiB{Ca@eAmEyOmBiHk@sAm@iAcC_DcCaDcAyAk@oAk@gAiCkGiCuGsAiDsCeHkBaFu@aCiAeDYs@{AsDqAqDk@oBSgAUyBOyCCwD@aJAiFEeBKeAOy@k@_Ca@iAq@_Bg@u@}@w@cAy@cDkCcAeAqA}AaA{Ae@kAWeAOsAAiADeAV}A^gAl@iAf@o@f@g@x@g@dA]l@Kv@IxA@pEDfCBtC@dAHbANpBd@|AZ|@J|@B~@A`AGj@KnA]rBq@pCkAnBs@fAY~Ao@~@]b@KzAYbBSrAUr@Q|@_@pCqAnFgCxCwA`CkAfC{AbBiAbAg@RKfD_BbA]`AY|Ao@tBgAtB_AhB}@tCkBjD}BzB}A~AkAt@c@d@c@f@o@v@eA`@u@p@eBb@qA^yAJw@FiAAyAK{A]aBc@qAg@{@{@gAgDoCeJ{HeAgAuA_Be@i@wDmE}DwEaCaD_D{DuBgC}IyKyFkHyBmCeCoCiEiDcBqBoAgBMQaFwHeFeIgBcDsAyC{@yBqEwNuFyQ{BmHOc@g@iAWc@k@o@_@Yw@a@eAa@_AOwAEyAHeAVsAp@oBpAmBnAHP', 'kyimDgh_wMc@aB', 'ozimDik_wMKMIHKJMLKLOLKJMNKJMNKJONIJKJMJOPKJMNKJONIJMLMLMNKJMLKNMLGJMNKLGLMPIJMPMPINKPILKPKLKPININGHILMTMRILKPILGJKPIJKRMRILKPILMPGLIJKPGJMRILININOTILKNILKNKLKNILMPIJKLOPMNMNKLGHONIJONKLMLOPKJMNKJMNKJKJMLOPKJIJMLKJMNIJONOPKJKJKLMLKLEDLN', 'wdkmDgx}vMoDtDmIbJsAxA?NBf@Dj@pEhFrHjIJDJAROxLsKFLMJZt@ZGrAm@ROLEXCp@e@DFHA|AkAl@~Ax@tGADCH_@DV[?KGEg@LKJqAH'], 'I': ['Walk to R.K. Puram', 'Metro rail towards Botanical Garden and stop at Botanical Garden', 'Walk to Botanical Garden', 'Metro rail towards Dwarka Sector- 21 and stop at Noida Sec.-18', 'Travel rest by uber '], 'D': 23390},{'M': ['Car', 'Metro', 'Walk'], 'P': 118.0, 'T': 2758, 'R': ['enjmDct|vMpAIJKf@MFD?JWZ^EBI@Ey@uGm@_Bb@[oAwBiAuBoB{Bu@aAo@u@mIaLaIgL{@eA_@m@Wa@qAiBo@g@kAcBgBwBgByCuAsBy@uAj@o@LPbAzA~GdK`AtBfEjGHND?HBHFdGbJv@Ij@MvA{BZg@dAsBxAkCj@{@vBaEfCyDj@mAt@sAfGuJbBkCdDqFTu@fC_E`C_EFAJBTZ@LAJS^eBnCmC`Eo@b@GHGH@NAPEJOZo@bAbBzB`AhA?D?Li@lAo@d@', 'whgmDwebvMHD`C_IpIcYzBcJhA}FnAgG`AgE`AiDdBuDnByDfBmE`BuEf@sBd@cDb@{GVwEFgA`@}Cn@uCj@aCXwB@_CMmBcAuEa@qEAqCP}Fl@gPN}Cn@}IPuFFcC\\}Ll@}QLwAd@oCp@wCX_BTuCHwAb@_I`AsMToEEqAWuB{CmLs@kCuCoKY}B]{Eo@mDaDcKmEyNUeCO{EQwBw@wCkAqCuCgH{B}E_AoAcFqEaE{Da@a@iCmDmAsBiB{Ca@eAmEyOmBiHk@sAm@iAcC_DcCaDcAyAk@oAk@gAiCkGiCuGsAiDsCeHkBaFu@aCiAeDYs@{AsDqAqDk@oBSgAUyBOyCCwD@aJAiFEeBKeAOy@k@_Ca@iAq@_Bg@u@}@w@cAy@cDkCcAeAqA}AaA{Ae@kAWeAOsAAiADeAV}A^gAl@iAf@o@f@g@x@g@dA]l@Kv@IxA@pEDfCBtC@dAHbANpBd@|AZ|@J|@B~@A`AGj@KnA]rBq@pCkAnBs@fAY~Ao@~@]b@KzAYbBSrAUr@Q|@_@pCqAnFgCxCwA`CkAfC{AbBiAbAg@RKfD_BbA]`AY|Ao@tBgAtB_AhB}@tCkBjD}BzB}A~AkAt@c@d@c@f@o@v@eA`@u@p@eBb@qA^yAJw@FiAAyAK{A]aBc@qAg@{@{@gAgDoCeJ{HeAgAuA_Be@i@wDmE}DwEaCaD_D{DuBgC}IyKyFkHyBmCeCoCiEiDcBqBoAgBMQaFwHeFeIgBcDsAyC{@yBqEwNuFyQ{BmHOc@g@iAWc@k@o@_@Yw@a@eAa@_AOwAEyAHeAVsAp@oBpAmBnAHP', 'sffmD_rcvM^jBn@`CBL^xABLBF[~@K\\aC~HEL_ApCGNK^Qj@Ut@ENoBrGC?A?A?A?A?A?A?A@A?A??@A?A??@A@A@A@ABIAKCIAWGCLGAaCi@i@KgBe@IZs@xCMb@KGA?A?A?A?A??@A?A?A@A??@A??@A?ELoAi@cAc@'], 'I': ['Start travel from Uber ', 'Metro to R.K. Puram from  Botanical Garden', 'Walk from R.K. Puram'], 'D': 25064}];
+            var hardData = [];
 
             var rightOpen = false;
             var origPos;
@@ -268,22 +258,21 @@
                     
                     map.fitBounds(bounds);
                     rightMenuAndBar.doToggle();
+                    document.querySelector("#arrow-routes").classList.add("expanded-right-ico");
                     rightOpen = true;
-                    map.setZoom(12);
-                    $("#rightPanel").html('<div class="row"><div class="col"><h1 class="mt-4">Routes</h1></div></div>');
+                    map.setZoom(9);
+                    $("#rightPanel").html('');
 
                     $.post("http://localhost:5000/abc", {source : $("#pac-input1").val(), destination:$("#pac-input2").val()}, function(data1){
                         var newJson = data1.replace(/([a-zA-Z0-9]+?):/g, '"$1":');
                         newJson = newJson.replace(/'/g, '"');
                         var data = JSON.parse(newJson);
-                        // console.log(data);
+                        console.log(data);
                         hardData = data;
                         populateData(hardData);
-
                     });
-
                 });
-
+                
                 $("#pac-input1").on("focus", function() {
                     document.querySelector('.nav-toggle').classList.remove('expanded');
                     document.querySelector('nav').classList.remove('expanded');
@@ -311,26 +300,43 @@
 
 
                 $("#arrow-routes").on("click", function() {
-                    if(!rightOpen){
-                        document.querySelector('.nav-toggle').classList.remove('expanded');
-                        document.querySelector('nav').classList.remove('expanded');
-                        rightMenuAndBar.navToggle.classList.add('expanded-right');
-                        rightMenuAndBar.nav.classList.add('expanded-right');
-                        document.querySelector("#pac-input1").classList.remove("moveLeft");
-                        document.querySelector("#pac-input2").classList.remove("moveLeft");
-                    }
-                    else{
+                    if(rightOpen){
                         document.querySelector('.nav-toggle').classList.remove('expanded');
                         document.querySelector('nav').classList.remove('expanded');
                         rightMenuAndBar.navToggle.classList.remove('expanded-right');
                         rightMenuAndBar.nav.classList.remove('expanded-right');
                         document.querySelector("#pac-input1").classList.remove("moveLeft");
                         document.querySelector("#pac-input2").classList.remove("moveLeft");
+                        document.querySelector("#arrow-routes").classList.remove("expanded-right-ico");
+                    }
+                    else{
+                        document.querySelector('.nav-toggle').classList.remove('expanded');
+                        document.querySelector('nav').classList.remove('expanded');
+                        rightMenuAndBar.navToggle.classList.add('expanded-right');
+                        rightMenuAndBar.nav.classList.add('expanded-right');
+                        document.querySelector("#pac-input1").classList.add("moveLeft");
+                        document.querySelector("#pac-input2").classList.add("moveLeft");
+                        document.querySelector("#arrow-routes").classList.add("expanded-right-ico");
                     }
                     rightOpen = !rightOpen;
                 });
           
             
+            }
+
+            function resetSite() {
+                $("#pac-input1").val("");
+                $("#pac-input2").val("");
+                $("#rightPanel").html('');   
+                routeOpen = false;         
+                rightOpen = false;
+                document.querySelector('.nav-toggle').classList.remove('expanded');
+                document.querySelector('nav').classList.remove('expanded');
+                rightMenuAndBar.navToggle.classList.remove('expanded-right');
+                rightMenuAndBar.nav.classList.remove('expanded-right');
+                document.querySelector("#pac-input1").classList.remove("moveLeft");
+                document.querySelector("#pac-input2").classList.remove("moveLeft");
+                document.querySelector("#arrow-routes").classList.remove("expanded-right-ico");
             }
         
         </script>

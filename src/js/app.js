@@ -143,84 +143,79 @@ function dayMode() {
     });
 }
 
+var routeOpen = false;
+
 function openRoute(element){
-  if(!tester)
+  
+  if(routeOpen)
     return;
   childrenList = $("#rightPanel").children();
   
-  var eleNumber = element.id[5];
-  
-  for (var i = 1; i < childrenList.length; i++) {
+  var eleNumber = element.id.split('e')[1];
+  for (var i = 1; i <= childrenList.length; i++) {
     if(i == eleNumber){
       continue;
     }
     else{
-      $(childrenList[i]).fadeOut("slow");  
-      $(childrenList[i]).hide();
+      $(childrenList[i-1]).fadeOut("slow");  
+      $(childrenList[i-1]).hide();
     }
   }
-  routeEleList = $(element).children();
-  for (var i = 0; i < 3; i++) {
-    $(routeEleList[i]).hide();
-  }
 
-  $($(element).children()[3]).fadeIn("fast", function() {
-    $(element).height(500);
-  });
-  tester = false;
+  $($(element).children()[3]).fadeIn("fast");
 
   for (var j = 0; j < hardData[eleNumber-1].R.length; j++) {
     mapFun(hardData[eleNumber-1].R[j], hardData[eleNumber-1].M[j]); 
   }
-
-  map.setZoom(12);
-
+  map.setZoom(10);
+  routeOpen = true;
 }
 
 function closeRoute(element){
-
+  
+  if(!routeOpen)
+    return;
   childrenList = $("#rightPanel").children();
 
-  var eleNumber = $($(element).parent()).attr('id')[5];
+  var eleNumber = $($(element).parent()).attr('id').split('e')[1];
   
-  for (var i = 1; i < childrenList.length; i++) {
+  for (var i = 1; i <= childrenList.length; i++) {
     if(i == eleNumber){
       continue;
     }
     else{
-      $(childrenList[i]).fadeIn("slow");  
-      $(childrenList[i]).show();
+      $(childrenList[i-1]).fadeIn("slow");  
+      $(childrenList[i-1]).show();
     }
   }
-  routeEleList = $($(element).parent()).children();
-  for (var i = 0; i < 3; i++) {
-    $(routeEleList[i]).show();
-  }
 
-  $(element).fadeOut("fast", function() {
-    $($(element).parent()).height(44);
-  });
-  setTimeout(function(){
-    tester = true;
-}, 1000);
+  $(element).fadeOut("fast");
 
   for (var j = 0; j < curPolyline.length; j++) {
     curPolyline[j].setMap(null);
   }
 
+  setTimeout(() => {
+    routeOpen = false;
+  }, 1000)
+
 }
 
 function toggleNightModeShift(){
-  $("#inputSlide").click();
   if(!nightModeOn){
     nightMode(); 
-    $("#inputSlide").prop('checked', true);
+    $("#nightModeRadio").addClass("bg-success");
+    $("#nightModeRadio").removeClass("bg-danger");
+    $("#nightModeRadio").text("ON");
   }
   else{
     dayMode();
-    $("#inputSlide").prop('checked', false);
+    $("#nightModeRadio").removeClass("bg-success");
+    $("#nightModeRadio").addClass("bg-danger");
+    $("#nightModeRadio").text("OFF");
   }
   nightModeOn = !nightModeOn;
+  resetSite();
 }
 
 function populateData(data){
@@ -228,14 +223,14 @@ function populateData(data){
     h = parseInt((data[i].T/60)/60);
     m = parseInt((data[i].T/60)%60);
     timePlace = h+"h"+m+"m";
-    var s = "";
+    var s = "<p class='m-0 mb-2 lead font-weight-bold text-primary'>Checkpoints</p>";
     for(var k = 0; k < data[i].I.length; k++){
-      s += '<p>' + data[i].I[k] + '</p>'
+      s += '<p class="m-0 mb-2 small">' + String(k+1) + '. ' + data[i].I[k] + '</p>'
     }
     if(data[i].M.includes("Walk")){
-     s += "<p><i>The pollution levels in the region you're travelling through is experiencing high levels of pollution. Please make sure to have a N95 mask on hand while walking on this trip.</i></p>";
+      s += "<p class='m-0 mb-2 mt-4 lead font-weight-bold text-danger'>Caution</p>" + "<p class='m-0 small'><i>The pollution levels in the region you're travelling through is experiencing high levels of pollution. Please make sure to have a N95 mask on hand while walking on this trip.</i></p>";
     }
-    domELe = '<div class="routePanel row m-1 my-5" id="route' + (i+1) +'" onclick="openRoute(this);"><div class="col-6 p-0 pl-3 text-left"><img src="./src/images/modes/uber.png" alt="Uber" class="minify-icons" id="uber"><img src="./src/images/modes/bus.png" alt="Bus" class="minify-icons" id="bus"><img src="./src/images/modes/walking.png" alt="Walk" class="minify-icons" id="walk"><img src="./src/images/modes/metro.png" alt="Metro" class="minify-icons" id="metro"></div><div class="routeText col-3 p-0"><span style="position: absolute; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%);" id="price">₹' + data[i].P + '</span></div><div class="routeText2 col-3 text-dark small p-0"><span style="position: absolute; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%);" id="time">' + timePlace + '</span></div><div class="col-12 pt-5" id="routeData" onclick="closeRoute(this);">' + s + '</div></div>';
+    domELe = '<div class="routePanel row m-1 py-2 mb-4" id="route' + (i+1) +'" onclick="openRoute(this);"><div class="col-6 p-0 pl-3 text-left"><img src="./src/images/modes/uber.png" alt="Uber" class="minify-icons" id="uber"><img src="./src/images/modes/bus.png" alt="Bus" class="minify-icons" id="bus"><img src="./src/images/modes/walking.png" alt="Walk" class="minify-icons" id="walk"><img src="./src/images/modes/metro.png" alt="Metro" class="minify-icons" id="metro"></div><div class="routeText col-3 p-0"><span style="position: absolute; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%);" id="price">₹' + data[i].P + '</span></div><div class="routeText2 col-3 text-dark small p-0"><span style="position: absolute; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%);" id="time">' + timePlace + '</span></div><div class="col-12 pt-2 pb-3 text-left" id="routeData" onclick="closeRoute(this);"> ' + s + '</div></div>';
     $("#rightPanel").append(domELe);
     if(!data[i].M.includes("Car")){
       $("#route" + (i+1)).find("#uber").hide();  

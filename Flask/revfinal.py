@@ -120,23 +120,13 @@ def metro_breakpoints(source, destination, line):
 
     return data_array
 
+
 def getuberprice(a,b,c,d):
-	tokens = ["nHAekV4vBpJmbgf_1DzaW1GgVAl5ggceN-X1_ARo","qMOnL1l20oAwreTtKAPuXhuFmWCTIJXe0tXZkjVe","APuykJdS83wzrNLDuRa13hIXci-DZ-VK7454kH_S","JA2aaRKKIsdXNSOG0ZtRzedVUegdQYsnrZ9pPvWE","mHUzAGLUDv9Fp1j-H1O3nVIx02gtDtL7NGpWJqz5"]
-	token = random.choice(tokens)
-	session = Session(server_token=token)
-	client = UberRidesClient(session)
-	response = client.get_price_estimates(
-	    start_longitude=a,
-	    start_latitude=b,
-	    end_longitude=c,
-	    end_latitude=d,
-	    seat_count=2
-	)
-	##print(response.json)
-	estimate = response.json.get('prices')
-	for i in estimate:
-		if i.get("display_name")=="UberGo":
-			return i
+	# session = Session(server_token=token)
+	# client = UberRidesClient(session)
+	# response = client.get_price_estimates(start_latitude=a,start_longitude=b,end_latitude=c,end_longitude=d,seat_count=2)
+	a = {"high_estimate": 10,"low_estimate": 5}
+	return a
 
 
 def geolocator(loc):
@@ -473,6 +463,7 @@ def func(source, destination):
 	# 	print(i)
 	# print("========================================")
 	# print()
+	# print(outerarray)
 	return outerarray
 # func( "IIT Delhi Main Building","Mall of India")
 

@@ -5,6 +5,7 @@ from uber_rides.client import UberRidesClient
 import random
 import copy 
 
+token = "JA.VUNmGAAAAAAAEgASAAAABwAIAAwAAAAAAAAAEgAAAAAAAAG8AAAAFAAAAAAADgAQAAQAAAAIAAwAAAAOAAAAkAAAABwAAAAEAAAAEAAAAIKGaa5nxJlrmwZjTdPB-klsAAAA5Yebyi1rG9sNUktSXTuRj4y81DjAxXkPbjsyBi7oE676IlVXO0CRJxoWGLcFlAcxFlFF2PMbrL-5QITLU_xV_yXRT_hYMe5P3pf8rabG5qML4aVlaBiBepA69hMdCx6o1KZNpaAn3sGFYCyADAAAAI2Rnh2ia7T3BwVXrSQAAABiMGQ4NTgwMy0zOGEwLTQyYjMtODA2ZS03YTRjZjhlMTk2ZWU"
 # Violet Line
 violet_line = ["Kashmere Gate","Lal Quila","Jama Masjid","Delhi Gate","ITO","Mandi House","Janpath","Central Secretariat","Khan Market","Jawaharlal Nehru Stadium","Jangpura","Lajpat Nagar","Moolchand","Kailash Colony","Nehru Place","Kalkaji Mandir","Govind Puri","Harkesh Nagar Okhla","Jasola Apollo","Sarita Vihar","Mohan Estate","Tughlakabad","Badarpur","Sarai","NHPC Chowk","Mewala Maharajpur","Sector- 28","Manav Rachna - Badkal Mor","Old Faridabad","Lakhani Armaan - Neelam Chowk Ajronda","Bata Chowk","Escorts Mujesar"]
 
@@ -121,22 +122,11 @@ def metro_breakpoints(source, destination, line):
     return data_array
 
 def getuberprice(a,b,c,d):
-	tokens = ["nHAekV4vBpJmbgf_1DzaW1GgVAl5ggceN-X1_ARo","qMOnL1l20oAwreTtKAPuXhuFmWCTIJXe0tXZkjVe","APuykJdS83wzrNLDuRa13hIXci-DZ-VK7454kH_S","JA2aaRKKIsdXNSOG0ZtRzedVUegdQYsnrZ9pPvWE","mHUzAGLUDv9Fp1j-H1O3nVIx02gtDtL7NGpWJqz5"]
-	token = random.choice(tokens)
-	session = Session(server_token=token)
-	client = UberRidesClient(session)
-	response = client.get_price_estimates(
-	    start_longitude=a,
-	    start_latitude=b,
-	    end_longitude=c,
-	    end_latitude=d,
-	    seat_count=2
-	)
-	##print(response.json)
-	estimate = response.json.get('prices')
-	for i in estimate:
-		if i.get("display_name")=="UberGo":
-			return i
+	# session = Session(server_token=token)
+	# client = UberRidesClient(session)
+	# response = client.get_price_estimates(start_latitude=a,start_longitude=b,end_latitude=c,end_longitude=d,seat_count=2)
+	a = {"high_estimate": 10,"low_estimate": 5}
+	return a
 
 
 def geolocator(loc):
@@ -484,5 +474,7 @@ def func(source, destination):
 	# 	#print("-----------------------------------------")
 	# 	#print()
 	##print("ctr", ctr)
+	# print(outerarray)
 	return outerarray
 	
+# func("IIITD","IITD")

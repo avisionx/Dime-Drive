@@ -10,9 +10,9 @@ def ok():
 	source = request.form['source']
 	destination = request.form['destination']
 	json1 = final.func(source, destination)
-	print(json1)
+	print("A.", json1)
 	json2 = revfinal.func(source, destination)
-	print(json2)
+	print("B. ", json2)
 	return str(json1+json2)
 
 if __name__ == '__main__':
