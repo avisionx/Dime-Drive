@@ -159,7 +159,13 @@ def getuberprice(a,b,c,d):
 	c = 2 * atan2(sqrt(a), sqrt(1 - a))
 
 	distance = R * c
-	a = {"high_estimate": 10*distance,"low_estimate": 9*distance}
+	hi = 10*distance
+	lo = 9*distance
+	if hi<50:
+		hi = 50
+	if lo<40:
+		lo = 40
+	a = {"high_estimate": hi,"low_estimate": lo}
 	return a
 
 
