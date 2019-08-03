@@ -226,12 +226,14 @@ function populateData(data){
     timePlace = h+"h"+m+"m";
     var s = "<p class='m-0 mb-2 lead font-weight-bold text-primary'>Checkpoints</p>";
     for(var k = 0; k < data[i].I.length; k++){
-      s += '<p class="m-0 mb-2 small">' + String(k+1) + '. ' + data[i].I[k] + '</p>'
+      s += '<p class="m-0 mb-2 small">' + String(k+1) + '. ' + data[i].I[k] + '</p>';
     }
+    s += "<p class='m-0 mb-2 mt-4 lead font-weight-bold text-success'>Carbon Footprint</p>";
+    s += "<p class='m-0 small'>" + roundToTwo(data[i].Z * 1000) + "gram of CO2 emission estimated in this trip.</p>";
     if(data[i].M.includes("Walk")){
       s += "<p class='m-0 mb-2 mt-4 lead font-weight-bold text-danger'>Caution</p>" + "<p class='m-0 small'><i>The pollution levels in the region you're travelling through is experiencing high levels of pollution. Please make sure to have a N95 mask on hand while walking on this trip.</i></p>";
     }
-    domELe = '<div class="routePanel row m-1 py-2 mb-4" id="route' + (i+1) +'" onclick="openRoute(this);"><div class="col-6 p-0 pl-3 text-left"><img src="./src/images/modes/uber.png" alt="Uber" class="minify-icons" id="uber"><img src="./src/images/modes/bus.png" alt="Bus" class="minify-icons" id="bus"><img src="./src/images/modes/walking.png" alt="Walk" class="minify-icons" id="walk"><img src="./src/images/modes/metro.png" alt="Metro" class="minify-icons" id="metro"></div><div class="routeText col-3 p-0"><span style="position: absolute; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%);" id="price">₹' + data[i].P + '</span></div><div class="routeText2 col-3 text-dark small p-0"><span style="position: absolute; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%);" id="time">' + timePlace + '</span></div><div class="col-12 pt-2 pb-3 text-left" id="routeData" onclick="closeRoute(this);"> ' + s + '</div></div>';
+    domELe = '<div class="routePanel row m-1 py-2 mb-4" id="route' + (i+1) +'" onclick="openRoute(this);"><div class="col-6 p-0 pl-3 text-left"><img src="./src/images/modes/uber.png" alt="Uber" class="minify-icons" id="uber"><img src="./src/images/modes/bus.png" alt="Bus" class="minify-icons" id="bus"><img src="./src/images/modes/walking.png" alt="Walk" class="minify-icons" id="walk"><img src="./src/images/modes/metro.png" alt="Metro" class="minify-icons" id="metro"></div><div class="routeText col-3 p-0"><span style="position: absolute; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%);" id="price">₹' + roundToTwo(data[i].P) + '</span></div><div class="routeText2 col-3 text-dark small p-0"><span style="position: absolute; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%);" id="time">' + timePlace + '</span></div><div class="col-12 pt-2 pb-3 text-left" id="routeData" onclick="closeRoute(this);"> ' + s + '</div></div>';
     $("#rightPanel").append(domELe);
     if(!data[i].M.includes("Car")){
       $("#route" + (i+1)).find("#uber").hide();  
@@ -290,4 +292,8 @@ function mapFun(points, mVal){
   curPolyline.push(polyline);
   polyline.setMap(map);
   map.fitBounds(bounds);  
+}
+
+function roundToTwo(num) {    
+  return +(Math.round(num + "e+2")  + "e-2");
 }
