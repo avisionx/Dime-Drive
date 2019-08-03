@@ -44,7 +44,7 @@ green_line_1 = ["Mundka" ,"Rajdhani Park" ,"Nangloi Railway Station" ,"Nangloi" 
 green_line_2 = ["Mundka" ,"Rajdhani Park" ,"Nangloi Railway Station" ,"Nangloi" ,"Maharaja Surajmal Stadium" ,"Udyog Nagar" ,"Peera Garhi" ,"Paschim Vihar West" ,"Paschim Vihar East" ,"Madipur" ,"Shivaji Park" ,"Punjabi Bagh" ,"Ashok Park Main" ,"Inderlok"]
 
 def metro_breakpoints(source, destination, line):
-    ##print(line)
+    #print(line)
     current_metro_line = []
     if line == "Yellow Line":
         current_metro_line = yellow_line
@@ -71,18 +71,18 @@ def metro_breakpoints(source, destination, line):
     elif line == "Pink Line":
         if source in pink_line_1 and destination in pink_line_1:
             current_metro_line = pink_line_1
-            ##print("ooo")
+            #print("ooo")
         elif source in pink_line_2 and destination in pink_line_2:
             current_metro_line = pink_line_2
-            ##print("zdz")
+            #print("zdz")
     else:
         return -1
-    ##print("curr")
-    ##print(current_metro_line)
+    #print("curr")
+    #print(current_metro_line)
     start = current_metro_line.index(source)
     end = current_metro_line.index(destination)
     intermediate_stations = abs(end - start) - 1
-    ##print("wecfacad",intermediate_stations)
+    #print("wecfacad",intermediate_stations)
 
     path = []
     itr = min(start,end) + 1
@@ -120,7 +120,6 @@ def metro_breakpoints(source, destination, line):
 
     return data_array
 
-
 def getuberprice(a,b,c,d):
 	# session = Session(server_token=token)
 	# client = UberRidesClient(session)
@@ -130,7 +129,7 @@ def getuberprice(a,b,c,d):
 
 
 def geolocator(loc):
-	#print(loc)
+	print(loc)
 	response = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address='+loc+'&key=AIzaSyAYtknq4sKKgRyDsGmWofiQ94mFFGBjRJM')
 	result = response.json()
 	coor = []
@@ -151,7 +150,6 @@ def func(source, destination):
 
 	response = requests.get('https://maps.googleapis.com/maps/api/directions/json?origin='+loc1+'&destination=' + loc2 + '&mode=transit&alternatives=true&key=AIzaSyAYtknq4sKKgRyDsGmWofiQ94mFFGBjRJM')
 	result = response.json()
-
 	lolresponse = requests.get('https://maps.googleapis.com/maps/api/directions/json?origin='+loc1+'&destination=' + loc2 + '&mode=driving&key=AIzaSyAYtknq4sKKgRyDsGmWofiQ94mFFGBjRJM')
 	lolresult = lolresponse.json()
 	overview_polyline = lolresult.get('routes')[0].get('overview_polyline').get('points')
@@ -205,13 +203,13 @@ def func(source, destination):
 		ctr=0
 		for i in step :
 		    ctr = ctr+1
-		    # #print(len(step))
-		    # #print(i.get('html_instructions'))
+		    # print(len(step))
+		    # print(i.get('html_instructions'))
 		    
 		    poly = i.get('polyline')
 		    Polyline.append(poly.get('points'))
 		    text =  i.get('html_instructions')
-
+		    # print(text)
 		    if (text[:10].find("Bus") != -1):
 		        Polylinemode.append("Bus")
 
@@ -289,9 +287,9 @@ def func(source, destination):
 		        # for all breakboints
 		        # uber and append to the list
 		        line = Transit_Details.get('line').get('name')
-		        ##print(Transit_Details.get('departure_stop').get('name'), Transit_Details.get('arrival_stop').get('name'), line)
+		        #print(Transit_Details.get('departure_stop').get('name'), Transit_Details.get('arrival_stop').get('name'), line)
 		        breakpoints = metro_breakpoints(Transit_Details.get('departure_stop').get('name'), Transit_Details.get('arrival_stop').get('name'), line)
-		        ##print(breakpoints)
+		        #print(breakpoints)
 		        if (not (breakpoints ==None or breakpoints == -1)):
 			        for breakpoint in breakpoints:
 			        	name = breakpoint[0]
@@ -367,7 +365,7 @@ def func(source, destination):
 		        c1 = i.get('start_location')
 		        c2 = i.get('end_location')
 		        uberfromhere = getuberprice(lng2,lat2,c2.get('lng'),c2.get('lat'))
-		        ##print(uberfromhere)
+		        #print(uberfromhere)
 		        price =  price + uberfromhere.get('high_estimate')
 		        vary = uberfromhere.get('high_estimate') - uberfromhere.get('low_estimate')
 		        Finalvary.append(vary)
@@ -408,6 +406,7 @@ def func(source, destination):
 		        price =  price - uberfromhere.get('high_estimate')
 	allpublicindex = len(Finaltimes) -1        
 	#return ....
+	# print(FinalInstructions,"finalins")
 	outerarray = []
 	mini = 0
 	for i in range(allpublicindex):
@@ -418,63 +417,50 @@ def func(source, destination):
 		iiinnerdict["M"] = Finalroutesmodes[i]
 		iiinnerdict["P"] = FinalPrice[i]
 		iiinnerdict["T"] = Finaltimes[i]
-		iiinnerdict["R"] = Finalroutes[i]
+		# iiinnerdict["R"] = Finalroutes[i]
 		iiinnerdict["I"] = FinalInstructions[i]
 		iiinnerdict["D"] = Finaldistance[i]
 		outerarray.append(iiinnerdict)
 		mini+=1
-	#print()		
-	##print(outerarray)		
-	#return outerarray
-
-	# ##print("lolo")
-	# ##print()
-	# #print("Instructions : ")
-	# for i in FinalInstructions:
-	# 	for j in i:
-	# 		#print(j)
-	# 	#print("_________________________________")
-	# 	#print()
-
-	# print()
-	# print("RoutesMode")
-	# for i in Finalroutesmodes:
-	# 	print(i)
-	# print()
-
-	# print("Vary : ")
-	# for i in Finalvary:
-	# 	print(i)
-	# print()
-
-	# print("Prices : ")
-	# for i in FinalPrice:
-	# 	print(i)
-	# print()
-
-	# print("time : ")		
-	# for i in Finaltimes:
-	# 	print(i)
-	# print()
-
-	# print("distances :")	
-
-	# for i in Finaldistance:
-	# 	print(i)
-	# print("========================================")
-	# print()
-	# print(outerarray)
+	print()		
+	# print(outerarray)		
 	return outerarray
+
+	#print("lolo")
+	#print()
+	print("Instructions : ")
+	for i in FinalInstructions:
+		for j in i:
+			print(j)
+		print("_________________________________")
+		print()
+
+	print()
+	print("RoutesMode")
+	for i in Finalroutesmodes:
+		print(i)
+	print()
+
+	print("Vary : ")
+	for i in Finalvary:
+		print(i)
+	print()
+
+	print("Prices : ")
+	for i in FinalPrice:
+		print(i)
+	print()
+
+	print("time : ")		
+	for i in Finaltimes:
+		print(i)
+	print()
+
+	print("distances :")	
+
+	for i in Finaldistance:
+		print(i)
+	print("========================================")
+	print()
+
 # func( "IIT Delhi Main Building","Mall of India")
-
-
-
-
-
-	# for i in Finalroutes:
-	# 	for j in i:
-	# 		print(j)
-	# 		print("*******************************************************")
-	# 		print()
-	# 	print("-----------------------------------------")
-	# 	print()
