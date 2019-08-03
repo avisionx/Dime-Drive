@@ -219,6 +219,7 @@ function toggleNightModeShift(){
 }
 
 function populateData(data){
+  $("#rightPanel").html('');
   for (var i = 0; i < data.length; i++) {
     h = parseInt((data[i].T/60)/60);
     m = parseInt((data[i].T/60)%60);

@@ -50,7 +50,8 @@
 
         <nav class="nav-right">
             <h1 class="mt-5 mb-4">Routes</h1>
-            <div class="container" id="rightPanel" style="overflow-y:scroll; height: 100%; padding-bottom: 100px">   
+            <div class="container" id="rightPanel" style="overflow-y:scroll; height: 100%; padding-bottom: 100px;">   
+
             </div>
         </nav>
 
@@ -261,9 +262,12 @@
                     document.querySelector("#arrow-routes").classList.add("expanded-right-ico");
                     rightOpen = true;
                     map.setZoom(9);
-                    $("#rightPanel").html('');
 
-                    $.post("http://localhost:5000/abc", {source : $("#pac-input1").val(), destination:$("#pac-input2").val()}, function(data1){
+                    $("#rightPanel").html('<img src="./src/images/spinner.svg" width="100px" style="position: absolute; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%)">');
+                    $.post("http://localhost:5000/abc", {
+                        source : $("#pac-input1").val(), 
+                        destination:$("#pac-input2").val()
+                    }, function(data1){
                         var newJson = data1.replace(/([a-zA-Z0-9]+?):/g, '"$1":');
                         newJson = newJson.replace(/'/g, '"');
                         var data = JSON.parse(newJson);
