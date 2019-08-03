@@ -417,7 +417,7 @@ def func(source, destination):
 		iiinnerdict["M"] = Finalroutesmodes[i]
 		iiinnerdict["P"] = FinalPrice[i]
 		iiinnerdict["T"] = Finaltimes[i]
-		# iiinnerdict["R"] = Finalroutes[i]
+		iiinnerdict["R"] = Finalroutes[i]
 		iiinnerdict["I"] = FinalInstructions[i]
 		iiinnerdict["D"] = Finaldistance[i]
 		outerarray.append(iiinnerdict)
