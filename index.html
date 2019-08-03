@@ -264,7 +264,7 @@
                     map.setZoom(9);
 
                     $("#rightPanel").html('<img src="./src/images/spinner.svg" width="100px" style="position: absolute; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%)">');
-                    $.post("http://localhost:5000/abc", {
+                    $.post("https://dimedrive.herokuapp.com/abc", {
                         source : $("#pac-input1").val(), 
                         destination:$("#pac-input2").val()
                     }, function(data1){
